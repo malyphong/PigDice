@@ -18,11 +18,13 @@
           <div class="col-md-6 player1">
             <h1>Player One</h1>
             <label for="player1">Player One</label>
+
             <input type="text" name="player1" class="player1" value="player1">
           </div>
           <div class="col-md-6 player2">
             <h1>Player Two</h1>
             <label for="player2">Player One</label>
+
             <input type="text" name="player2" class="player2" value="player2">
           </div>
         </div>
@@ -32,11 +34,11 @@
       <div class="rollAndHold">
         <div class="row">
           <div class="col-md-6">
-            <h1>Player 1</h1>
+              <h2 id="player1"></h2>
             <p class="player1Score"></p>
           </div>
           <div class="col-md-6">
-            <h1>Player 2</h1>
+            <h2 id="player2"></h2>
             <p class="player2Score"></p>
           </div>
         </div>
@@ -53,7 +55,7 @@
 
         </div>
         <div class="winning">
-          <h1>Congratulations, you've won!</h1>
+          <h1>Congratulations,<span class="winner"></span> you've won!</h1>
           <button type="submit" name="button"><a href="index.html">Play again?</a></button>
         </div>
     </div>

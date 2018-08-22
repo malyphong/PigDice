@@ -65,11 +65,12 @@ var hold = function() {
   var newTotalScore = lastTotalScore() + turnScore;
   var currentPlayer = activePlayer();
   var currentTurn = new Turn(currentPlayer, turnScore, newTotalScore);
+    win(newTotalScore);
     Scores.push(currentTurn);
     playerTurnMessage(activePlayer());
     turnScore = 0;
     clearDice();
-    win(newTotalScore);
+
   }
 
 var dice = function() {
@@ -85,6 +86,7 @@ var win = function(finalNumber) {
   if (finalNumber >= 100) {
     $(".winning").show();
     $(".rollAndHold").hide();
+    $(".winner").text(activePlayer());
   } else {
   }
 }
@@ -115,6 +117,9 @@ $(document).ready(function() {
     $("#currentPlayer").text(player1Name + "'s turn");
     currentPlayer.push(player1Name);
     currentPlayer.push(player2Name);
+
+    $("h2#player1").text(player1Name);
+    $("h2#player2").text(player2Name);
 
     $("#playerRoll").click(function(event) {
       event.preventDefault();
