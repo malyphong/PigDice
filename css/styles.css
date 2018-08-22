@@ -1,3 +1,11 @@
-/* .rollAndHold {
+body {
+  text-align: center;
+}
+.rollAndHold {
   display: none;
-} */
+}
+.winning {
+  display: none;
+}
+.output {
+}
