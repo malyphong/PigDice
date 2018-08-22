@@ -1,10 +1,7 @@
 // business logic
-player1Score = [];
-player2Score = [];
+Scores = [];
+currentPlayer = [];
 var turnScore = 0;
-var currentPlayer = "";
-var player1Name = "";
-var player2Name = "";
 
 function Turn(name, turnScore, totalScore) {
 this.playerName = name;
@@ -12,55 +9,61 @@ this.turnScore = turnScore;
 this.totalScore = totalScore;
 }
 
-var currentTotalScore = function() {
-  if (player1Name = currentPlayer) {
-    if (player1Score.length === 0) {
-      return 0;
-    } else {
-    currentTotal = player1Score[player1Score.length - 1].totalScore;
-    return currentTotal;
-    }
+var activePlayer = function() {
+  if (Scores.length % 2 === 0 || Scores.length === 0) {
+    return currentPlayer[0];
   } else {
-    if (player2Score.length === 0) {
+    return currentPlayer[1];
+  }
+}
+
+var player1Score = function () {
+  if (Scores.length === 0) {
+    return 0;
+  } else if (Scores.length % 2 === 1) {
+    return Scores[Scores.length - 1].totalScore;
+  } else {
+    return Scores[Scores.length - 2].totalScore;
+  }
+}
+
+var player2Score = function () {
+  if (Scores.length < 2) {
+    return 0;
+  } else if (Scores.length % 2 === 0) {
+    return Scores[Scores.length - 1].totalScore;
+  } else {
+    return Scores[Scores.length - 2].totalScore;
+  }
+}
+
+var lastTotalScore = function() {
+    if (Scores.length < 2) {
       return 0;
     } else {
-    currentTotal = player1Score[player2Score.length - 1].totalScore;
+    currentTotal = Scores[Scores.length - 2].totalScore;
     return currentTotal;
     }
-  }
 }
 
 var rollDice = function(diceRoll) {
   if (diceRoll === 1) {
     turnScore = 0;
-    newTotalScore = currentTotalScore() + turnScore;
+    var newTotalScore = lastTotalScore() + turnScore;
+    var currentPlayer = activePlayer();
     var currentTurn = new Turn(currentPlayer, turnScore, newTotalScore);
-    if (currentPlayer = player1Name) {
-      player1Score.push(currentTurn);
-      turnScore = 0;
-      currentPlayer = player2Name;
-    } else {
-        player2Score.push(currentTurn);
-        turnScore = 0;
-        currentPlayer = player1Name;
-    }
+    Scores.push(currentTurn);
   } else {
     turnScore = turnScore + diceRoll;
   }
 }
 
 var hold = function() {
-  newTotalScore = currentTotalScore() + turnScore;
+  var newTotalScore = lastTotalScore() + turnScore;
+  var currentPlayer = activePlayer();
   var currentTurn = new Turn(currentPlayer, turnScore, newTotalScore);
-  if (currentPlayer = player1Name) {
-    player1Score.push(currentTurn);
+    Scores.push(currentTurn);
     turnScore = 0;
-    currentPlayer = player2Name;
-  } else {
-      player2Score.push(currentTurn);
-      turnScore = 0;
-      currentPlayer = player1Name;
-  }//SWITCH PLAYER//
 }
 
 var dice = function() {
@@ -80,24 +83,24 @@ $(document).ready(function() {
 
     player1Name = $("input.player1").val();
     player2Name = $("input.player2").val();
-    currentPlayer = player1Name;
-
+    currentPlayer.push(player1Name);
+    currentPlayer.push(player2Name);
 
     $("#playerRoll").click(function(event) {
       event.preventDefault();
       var currentRoll = dice();
       rollDice(currentRoll);
-      console.log(player1Score);
-      console.log(player2Score);
-
+      console.log(currentRoll);
       $(".dice").text(currentRoll);
-      $("#newScore").text(currentTotalScore());
+      console.log(Scores.length)
+      $("#newScore").text("Player 1 score: " + player1Score() + " and Player 2 score: " + player2Score());
     });
 
     $("#hold").click(function(event) {
       event.preventDefault();
       hold();
-      $("#newScore").text(currentTotalScore());
+      $("#newScore").text("Player 1 score: " + player1Score() + " and Player 2 score: " + player2Score());
+      console.log(Scores);
     });
 
   });
