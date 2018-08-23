@@ -17,6 +17,17 @@
         <h2>1 Player or 2 Player Mode</h2>
         <button type="submit" name="button" id="vsComputer">VS Computer</button>
         <button type="submit" name="button" id="2Players">2 player</button>
+        <h4>Select Number of Dice:</h4>
+        <div class="radio">
+          <label>
+             <input type="radio" name="diceSelect" class="1Die" value="1Die" checked="checked">
+             1
+           </label>
+           <label>
+             <input type="radio" name="diceSelect" class="2Dice" value="2Dice">
+             2
+           </label>
+        </div>
       </div>
 <!-- 2 player form -->
       <form class="form-group">
@@ -69,10 +80,12 @@
           <div class="activePlayer">
             <h2><span id="currentPlayer"></span></h2>
           </div>
-          <button class="userButton" id="playerRoll" type="onclick" name="button">Roll</button>
+          <button class="userButton" id="playerRoll1" type="onclick" name="button">Roll</button>
+          <button class="userButton" id="playerRoll2" type="onclick" name="button">Roll</button>
           <button class="userButton" id="hold" type="onclick" name="button">Hold</button>
           <br>
           <span class="dice"></span>
+          <span class="score-card"></span>
         </div>
 
         </div>
