@@ -40,8 +40,6 @@ var player2Score = function () {
   }
 }
 
-
-
 var lastTotalScore = function() {
     if (Scores.length < 2) {
       return 0;
@@ -63,6 +61,7 @@ var endTurn = function () {
   var currentTurn = new Turn(currentPlayer, turnScore, newTotalScore);
     win(newTotalScore);
     Scores.push(currentTurn);
+    displayScores();
     playerTurnMessage(activePlayer());
     turnScore = 0;
 }
@@ -81,6 +80,7 @@ var rollDice = function(diceRoll) {
 var hold = function() {
     endTurn();
     clearDice();
+
   }
 
 //COMPUTER LOGIC
@@ -99,6 +99,9 @@ var rollDiceComputer = function(diceRoll) {
   }
 }
 
+var compHold = function() {
+
+}
 
 var computerTurn1 = function() {
   setTimeout(function() {
@@ -109,8 +112,9 @@ var computerTurn1 = function() {
       toggleOn();
     } else {
       turnScore = turnScore + diceLog[diceLog.length-1];
-      if (turnScore >= 6) {
+      if (turnScore >= 12) {
         endTurn();
+        diceLog.push(1);
         toggleOn();
       } else {
         computerTurn1();
@@ -133,6 +137,7 @@ var computerDiceThrow = function () {
   currentRoll = diceLog[diceLog.length-1];
   $(".dice").append(diceFaces[currentRoll-1]);
 }
+
 
 
 
@@ -174,8 +179,8 @@ var delayClearDice = function() {
 }
 
 var displayScores = function () {
-  
-
+  $(".player1Score").text("Score:" + player1Score());
+  $(".player2Score").text("Score:" + player2Score());
 }
 
 $(document).ready(function() {
@@ -207,16 +212,14 @@ $(document).ready(function() {
       console.log(currentRoll);
       $(".dice").append(diceFaces[currentRoll-1]);
 
-      $(".player1Score").text("Player 1 score:" + player1Score());
-      $(".player2Score").text("Player 2 score:" + player2Score());
+      displayScores();
 
     });
 
     $("#hold").click(function(event) {
       event.preventDefault();
       hold();
-      $(".player1Score").text("Player 1 score:" + player1Score());
-      $(".player2Score").text("Player 2 score:" + player2Score());
+      displayScores();
     });
 
   });
@@ -238,9 +241,6 @@ $(document).ready(function() {
     $("#currentPlayer").text(player1Name + "'s turn");
     currentPlayer.push(player1Name);
     currentPlayer.push(player2Name);
-
-
-
 // edit for computer play
     $("h2#player1").text(player1Name);
     $("h2#player2").text(player2Name);
@@ -248,15 +248,13 @@ $(document).ready(function() {
       event.preventDefault();
       var currentRoll = dice();
       rollDiceComputer(currentRoll);
-      $(".player1Score").text("Player 1 score:" + player1Score());
-      $(".player2Score").text("Computer score:" + player2Score());
     });
     $("#hold").click(function(event) {
       event.preventDefault();
       hold();
-      $(".player1Score").text("Player 1 score:" + player1Score());
-      $(".player2Score").text("Computer score:" + player2Score());
-
+      toggleOff();
+      displayScores();
+      computerTurn1();
     });
   });
 });
