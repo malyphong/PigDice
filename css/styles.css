@@ -9,3 +9,11 @@ body {
 }
 .output {
 }
+
+.form-group {
+  display: none;
+}
+
+.computer-form {
+  display: none;
+}

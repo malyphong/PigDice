@@ -13,23 +13,46 @@
       <div class="jumbotron">
         <h1>Pig Dice</h1>
       </div>
+      <div class="playDecision">
+        <h2>1 Player or 2 Player Mode</h2>
+        <button type="submit" name="button" id="vsComputer">VS Computer</button>
+        <button type="submit" name="button" id="2Players">2 player</button>
+      </div>
+<!-- 2 player form -->
       <form class="form-group">
         <div class ="row">
           <div class="col-md-6 player1">
             <h1>Player One</h1>
             <label for="player1">Player One</label>
-
             <input type="text" name="player1" class="player1" value="player1">
           </div>
           <div class="col-md-6 player2">
             <h1>Player Two</h1>
-            <label for="player2">Player One</label>
+            <label for="player2">Player Two</label>
 
             <input type="text" name="player2" class="player2" value="player2">
           </div>
         </div>
         <button type="submit" name="button">Play!</button>
       </form>
+<!-- 2 player Form -->
+<!--  computer form -->
+  <form class="computer-form">
+    <div class ="row">
+      <div class="col-md-6 player1">
+        <h1>Player One</h1>
+        <label for="player1">Player One</label>
+        <input type="text" name="player1" class="player1" value="player1">
+      </div>
+      <div class="col-md-6 player2">
+        <h1>Computer</h1>
+        <label for="player1">Computer</label>
+        <input type="text" name="computer" class="computer" value="Computer">
+      </div>
+      <button type="submit" name="1PlayerGame">Play!</button>
+    </div>
+  </form>
+<!-- computer form -->
 
       <div class="rollAndHold">
         <div class="row">
@@ -42,13 +65,12 @@
             <p class="player2Score"></p>
           </div>
         </div>
-
         <div class="output">
           <div class="activePlayer">
             <h2><span id="currentPlayer"></span></h2>
           </div>
-          <button id="playerRoll" type="onclick" name="button">Roll</button>
-          <button id="hold" type="onclick" name="button">Hold</button>
+          <button class="userButton" id="playerRoll" type="onclick" name="button">Roll</button>
+          <button class="userButton" id="hold" type="onclick" name="button">Hold</button>
           <br>
           <span class="dice"></span>
         </div>
